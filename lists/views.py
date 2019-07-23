@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+
 # every view function must be given a HttpRequest()
 def home_page(request):
-    return HttpResponse('<html><title>To-Do lists</title></html>')
-
+    return render(request, 'home.html')

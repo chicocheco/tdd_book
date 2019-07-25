@@ -30,30 +30,36 @@ class NewVisitorTest(unittest.TestCase):
         )
 
         # pise "Nakoupit pavi pera" do textoveho pole (rada vyrabi rybi navnady)
-        inputbox.send_keys('Buy peacock feathers.')
+        inputbox.send_keys('Buy peacock feathers')
 
-        # kdyz zmackne enter, stranka se obnovi, a stranka ted zobrazi na seznamu
+        # kdyz zmackne enter, stranka se obnovi
         inputbox.send_keys(Keys.ENTER)
         time.sleep(1)
 
+        # a stranka ted zobrazi polozku v ocislovanem seznamu
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
-        self.assertTrue(
-            any(row.text == '1: Buy peacock feathers' for row in rows),
-            'New to-do item did not appear in table'
-        )
+        self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
 
         # stale zde je textove pole rikajici si o pridani dalsi polozky
         # napise "pouzit pavi pera na vyrobu navnady" (Tania je velmi metodicka)
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('Use peacock feathers to make a fly')
+        inputbox.send_keys(Keys.ENTER)
+        time.sleep(1)
+
+        # seznam se znovu obnovi a ted Tania vidi obe polozky v seznamu
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
+        self.assertIn('2: Use peacock feathers to make a fly',
+                      [row.text for row in rows])
+
         self.fail('Finish the test!')
 
 
 if __name__ == '__main__':
     unittest.main()
-
-
-
-
 
 # stranka se znovu obnovi a ted jsou zobrazeny obe polozky na jejim seznamu
 

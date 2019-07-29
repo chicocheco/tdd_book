@@ -2,9 +2,10 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 import unittest
+from django.test import LiveServerTestCase
 
 
-class NewVisitorTest(unittest.TestCase):
+class NewVisitorTest(LiveServerTestCase):
 
     def setUp(self) -> None:
         self.browser = webdriver.Firefox()
@@ -20,7 +21,7 @@ class NewVisitorTest(unittest.TestCase):
     def test_can_start_a_list_and_retrieve_it_later(self):
         # tania slysela o husty novy apce to-do
         # jde se na to mrknout
-        self.browser.get('http://localhost:8000')
+        self.browser.get(self.live_server_url)
 
         # vsimne si, ze titulek stranky a zahlavi zminuji to-do lists
         self.assertIn('To-Do', self.browser.title)
@@ -61,11 +62,3 @@ class NewVisitorTest(unittest.TestCase):
         # uspokojena, jde spat
 
         self.fail('Finish the test!')
-
-
-if __name__ == '__main__':
-    unittest.main()
-
-
-
-

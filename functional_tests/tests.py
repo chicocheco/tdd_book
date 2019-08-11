@@ -67,12 +67,6 @@ class NewVisitorTest(LiveServerTestCase):
         self.wait_for_row_in_list_table('1: Buy peacock feathers')
         self.wait_for_row_in_list_table('2: Use peacock feathers to make a fly')
 
-        # Tania se zajima, zda si stranka pamatuje jeji seznam. Pak vidi, ze si pro ni
-        # stranka vygenerovala unikatni URL -- je zde vysvetlujici text k tomuto jevu
-
-        # navstivi tuto URL adresu - jeji to-do seznam tam stale je
-        # uspokojena, jde spat
-
     def test_multiple_users_can_start_lists_at_different_urls(self):
         # Tania si vytvori novy to-do seznam
         self.browser.get(self.live_server_url)
@@ -116,4 +110,4 @@ class NewVisitorTest(LiveServerTestCase):
 
         # uspokojeni, jdou oba do postele
 
-        self.fail('Finish the test!')
+        # self.fail('Finish the test!')

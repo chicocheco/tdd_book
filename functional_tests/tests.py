@@ -51,7 +51,7 @@ class NewVisitorTest(LiveServerTestCase):
 
         # pise "Nakoupit pavi pera" do textoveho pole (rada vyrabi rybi navnady)
         inputbox.send_keys('Buy peacock feathers')
-        # kdyz zmackne enter, stranka se obnovi
+        # kdyz stiskne enter, stranka se obnovi
         inputbox.send_keys(Keys.ENTER)
 
         # a stranka ted zobrazi polozku v ocislovanem seznamu

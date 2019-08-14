@@ -14,14 +14,14 @@ def view_list(request, list_id):
 
 
 def new_list(request):
-    # 'item_text' is a key from 'data' dict we are passing to a POST request in tests
-    # shorthand for .save() on Item
     list_ = List.objects.create()
+    # create a new Item within a new list from home page
     Item.objects.create(text=request.POST['item_text'], list=list_)
     return redirect(f'/lists/{list_.id}/')
 
 
 def add_item(request, list_id):
     list_ = List.objects.get(id=list_id)
+    # once we know id of list, retrieve its items
     Item.objects.create(text=request.POST['item_text'], list=list_)
     return redirect(f'/lists/{list_.id}/')

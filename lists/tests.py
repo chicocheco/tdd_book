@@ -5,7 +5,7 @@ from django.http import HttpRequest
 from lists.models import Item, List
 
 
-# Create your tests here.
+# Setup, Exercise, Assert is the typical structure for a  unit test.
 class HomePageTest(TestCase):
 
     def test_home_page_returns_correct_html(self):

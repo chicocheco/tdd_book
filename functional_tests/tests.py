@@ -14,6 +14,8 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
     def setUp(self) -> None:
         self.browser = webdriver.Firefox()
+        # always set the env.variable inline, do not "export"
+        # STAGING_SERVER=chicocheco.xyz python manage.py test functional_tests
         staging_server = os.environ.get('STAGING_SERVER')
         if staging_server:
             self.live_server_url = 'http://' + staging_server

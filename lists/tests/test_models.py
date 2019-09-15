@@ -1,4 +1,6 @@
 from django.test import TestCase
+from django.core.exceptions import ValidationError
+
 from lists.models import Item, List
 
 
@@ -32,3 +34,17 @@ class ItemAndListModelTest(TestCase):
         self.assertEqual(first_saved_item.list, list_)
         self.assertEqual(second_saved_item.text, 'Item the second')
         self.assertEqual(second_saved_item.list, list_)
+
+    # testing that the code under test should raise an exception
+    def test_cannot_save_empty_list_items(self):
+        list_ = List.objects.create()
+        item = Item(list=list_, text='')
+        with self.assertRaises(ValidationError):
+            item.save()
+            item.full_clean()  # 'cos SQLite does not raise ValidationError with .save
+        # with statement used with assertRaises saves use from doing this:
+        # try:
+        #   item.save()
+        #   self.fail('The save should have raised an exception')
+        # except ValidationError:
+        #   pass

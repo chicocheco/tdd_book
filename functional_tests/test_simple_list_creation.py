@@ -14,7 +14,7 @@ class NewVisitorTest(FunctionalTest):
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('To-Do', header_text)
 
-        # muze rovnou svobodne pridat polozku to-do
+        # muze pridat novou polozku to-do
         inputbox = self.browser.find_element_by_id('id_new_item')
         self.assertEqual(
             inputbox.get_attribute('placeholder'),
@@ -53,8 +53,7 @@ class NewVisitorTest(FunctionalTest):
 
         # nyni prijde jeste dalsi uzivatel na stranku, Standa
 
-        ## vytvorime novou kopii prihlizece k ujisteni se, ze zadna z Tanii informaci
-        ## neni vyzrazena z cookies atd.
+        ## vytvorime novou kopii prihlizece k ujisteni se, ze zadna z Tanii informaci neni vyzrazena z cookies atd.
         self.browser.quit()
         self.browser = webdriver.Firefox()
 
@@ -81,5 +80,3 @@ class NewVisitorTest(FunctionalTest):
         self.assertIn('Buy milk', page_text)
 
         # uspokojeni, jdou oba do postele
-
-        # self.fail('Finish the test!')

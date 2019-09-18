@@ -1,5 +1,6 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.common.exceptions import WebDriverException
 import time
 import os
@@ -10,7 +11,9 @@ MAX_WAIT = 10
 class FunctionalTest(StaticLiveServerTestCase):
 
     def setUp(self) -> None:
-        self.browser = webdriver.Firefox()
+        options = FirefoxOptions()
+        options.add_argument("--headless")
+        self.browser = webdriver.Firefox(options=options)
         # always set the env.variable inline, do not "export"
         # STAGING_SERVER=chicocheco.xyz python manage.py test functional_tests
         staging_server = os.environ.get('STAGING_SERVER')

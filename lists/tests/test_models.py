@@ -48,3 +48,7 @@ class ItemAndListModelTest(TestCase):
         #   self.fail('The save should have raised an exception')
         # except ValidationError:
         #   pass
+
+    def test_get_absolute_url(self):
+        list_ = List.objects.create()  # shortcut for List(...).save()
+        self.assertEqual(list_.get_absolute_url(), f'/lists/{list_.id}/')

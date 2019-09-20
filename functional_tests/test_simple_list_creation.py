@@ -58,6 +58,7 @@ class NewVisitorTest(FunctionalTest):
         self.browser = webdriver.Firefox()
 
         # Standa otevre domovskou stranku, kde neni znamky Tanii seznamu
+        # TODO: otevre se FF i presto, ze je headless
         self.browser.get(self.live_server_url)
         page_text = self.browser.find_element_by_tag_name('body').text
         self.assertNotIn('Buy peacock feathers', page_text)

@@ -8,16 +8,15 @@
     <link href="/static/base.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-6 jumbotron">
             <div class="text-center">
                 <h1>{% block header_text %}{% endblock %}</h1>
 
                 <form method="POST" action="{% block form_action %}{% endblock %}">
-                    <div class="input-group input-group-lg">
-                        <input class="form-control" name="item_text" id="id_new_item" placeholder="Enter a to-do item"/>
-                    </div>
+                    <input class="form-control form-control-lg" name="item_text" id="id_new_item"
+                           placeholder="Enter a to-do item"/>
                     {% csrf_token %}
                     {% if error %}
                         <div class="form-group has-error">

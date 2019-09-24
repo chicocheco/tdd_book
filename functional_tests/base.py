@@ -43,8 +43,14 @@ class FunctionalTest(StaticLiveServerTestCase):
         start_time = time.time()
         while True:
             try:
-                return fn()  # passing a function wrapped in lambda
+                return fn()
+                # we passed 'fn' as 'lambda: *function*' without (), therefore not calling it, just storing it
+                # we only call it when adding '()' to be able to run it repeatedly in the 'try' block
+                # we also 'return' it because it will either return True->pass or an exception error to work with later
             except (AssertionError, WebDriverException) as e:
                 if time.time() - start_time > MAX_WAIT:
                     raise e
                 time.sleep(0.5)
+
+    def get_item_input_box(self):
+        return self.browser.find_element_by_id('id_text')

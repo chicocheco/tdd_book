@@ -12,32 +12,25 @@ def home_page(request):
 
 def view_list(request, list_id):
     list_ = List.objects.get(id=list_id)
-    error = None
+    form = ItemForm()  # minimal implementation of 'form' passed to HTML
 
     if request.method == 'POST':
-        # TODO: remove duplication once 3rd strike is reached
-        try:
-            item = Item(text=request.POST['text'], list=list_)
-            item.full_clean()
-            item.save()
+        form = ItemForm(data=request.POST)
+        if form.is_valid():
+            Item.objects.create(text=request.POST['text'], list=list_)
             return redirect(list_)
-        except ValidationError:
-            error = "You can't have an empty list item."
     # else GET
-    return render(request, 'list.html', {'list': list_, 'error': error})
+    return render(request, 'list.html', {'list': list_, 'form': form})
 
 
 def new_list(request):
-    list_ = List.objects.create()
-    # create a new Item within a new list from home page
-    item = Item(text=request.POST['text'], list=list_)
-    try:
-        item.full_clean()
-        item.save()  # for non-SQlite DBs?
-    except ValidationError:
-        list_.delete()
-        error = "You can't have an empty list item."
-        # TODO: we don't use the ItemForm() at home.html here yet
-        return render(request, 'home.html', {'error': error})
-    return redirect(list_)  # taking advantage of get_absolute_url
+    form = ItemForm(data=request.POST)
+    if form.is_valid():
+        list_ = List.objects.create()
+        # create a new Item within a new list from home page
+        Item.objects.create(text=request.POST['text'], list=list_)
+        return redirect(list_)
+    else:
+        # either new (empty) or with .errors attribute if failed validating
+        return render(request, 'home.html', {'form': form})
 

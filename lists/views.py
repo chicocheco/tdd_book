@@ -15,9 +15,9 @@ def view_list(request, list_id):
     form = ItemForm()  # minimal implementation of 'form' passed to HTML
 
     if request.method == 'POST':
-        form = ItemForm(data=request.POST)
+        form = ItemForm(data=request.POST)  # passing dict to data arg from POST
         if form.is_valid():
-            Item.objects.create(text=request.POST['text'], list=list_)
+            form.save(for_list=list_)  # custom argument for_list to pass a List object
             return redirect(list_)
     # else GET
     return render(request, 'list.html', {'list': list_, 'form': form})
@@ -28,7 +28,8 @@ def new_list(request):
     if form.is_valid():
         list_ = List.objects.create()
         # create a new Item within a new list from home page
-        Item.objects.create(text=request.POST['text'], list=list_)
+        form.save(for_list=list_)
+        # new list object gets its new URL (defined in the List model)
         return redirect(list_)
     else:
         # either new (empty) or with .errors attribute if failed validating

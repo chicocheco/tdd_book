@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.core.exceptions import ValidationError
 from django.http import HttpResponse
 from lists.models import Item, List
-from lists.forms import ItemForm
+from lists.forms import ItemForm, ExistingListItemForm
 
 
 # every view function must be given a HttpRequest()
@@ -12,12 +12,12 @@ def home_page(request):
 
 def view_list(request, list_id):
     list_ = List.objects.get(id=list_id)
-    form = ItemForm()  # minimal implementation of 'form' passed to HTML
+    form = ExistingListItemForm(for_list=list_)  # not bounded, inherits from ItemForm, custom uniq. validation error
 
     if request.method == 'POST':
-        form = ItemForm(data=request.POST)  # passing dict to data arg from POST
+        form = ExistingListItemForm(for_list=list_, data=request.POST)  # bounded, passing dict to data arg from POST
         if form.is_valid():
-            form.save(for_list=list_)  # custom argument for_list to pass a List object
+            form.save()
             return redirect(list_)
     # else GET
     return render(request, 'list.html', {'list': list_, 'form': form})

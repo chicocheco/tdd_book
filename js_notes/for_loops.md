@@ -13,11 +13,11 @@ for (var i = 0; i <= 4; i++) {
 
 this runs 5 times, finishes when i === 4, (0, 1, 2, 3, 4):
 ```js
-if (var i = 0; i <= 4, i++) {}
+for (var i = 0; i <= 4; i++) {}
 ```
 this runs 4 times, finishes when === 3, (0, 1, 2, 3):
 ```js
-if (var i = 0; i < 4, i++) {}
+for (var i = 0; i < 4; i++) {}
 ```
 
 - the third argument "i++" **adds 1 AFTER each iteration** to "i" (likewise "++i" would add 1 in place)
@@ -29,13 +29,7 @@ if (var i = 0; i < 4, i++) {}
 for i in range(5):
     print(i)
 ```
-in compare with (always declare "i" as a variable first)
-```js
-if (var i = 0; i < 5, i++) {
-  // do something
-}
-```
-we can go to negative numbers too, always put the counter first like in **x > -3**
+- we can go to negative numbers too, always put the counter first like in **x > -3**
 ```js
 for (var x = 0; x > -3; i--) {
   // do something

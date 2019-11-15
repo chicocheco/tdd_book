@@ -5,10 +5,10 @@
 - all the how-to-loop directions in *for loops* are packed into the space between ()
 
 ```js
-var i = 0;
+let i = 0;
 while (i <= 3) {
-  alert(i);
-  i++;
+    alert(i);
+    i++;
 }
 ```
 In Python it works the same:
@@ -27,9 +27,9 @@ while n > 0:
 - the loop-limiting code moves to the bottom 
 - first iteration is guaranteed
 ```js
-var i = 0;
+let i = 0;
 do {
-  alert(i);
-  i++;
+    alert(i);
+    i++;
 } while (i < 0);
 ```

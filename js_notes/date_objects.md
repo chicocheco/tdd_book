@@ -29,13 +29,13 @@ name_of_today = day_names[the_day]
 - in JS we get milliseconds after the epoch by **new Date().getTime()** 
 - in Python we get seconds after the epoch by **time.time()**
 ```js
-var today = new Date();
-var doomsday = new Date("June 30, 2035");
-var msToday = today.getTime();
-var msDoomsday = doomsday.getTime();
-var msDiff = msDoomsday - msToday;
-// convert miliseconds to days and round down to whole days
-var dDiff = Math.floor(msDiff / (1000 * 60 * 60 * 24));
+const today = new Date();
+const doomsday = new Date("June 30, 2035");
+const msToday = today.getTime();
+const msDoomsday = doomsday.getTime();
+const msDiff = msDoomsday - msToday;
+// convert milliseconds to days and round down to whole days
+const dDiff = Math.floor(msDiff / (1000 * 60 * 60 * 24));
 // divide by 1000 to convert to seconds
 // divide by (1000 * 60) to convert to minutes
 // divide by (1000 * 60 * 60) convert to hours
@@ -58,9 +58,9 @@ alert(new Date("January 1, 1980").getTime());
 - one seconds has 1000 milliseconds
 ```js
 // this creates a Date object of the current moment
-var d = new Date();
+const d = new Date();
 // and this is how we keep it all the same except for the year
 d.setFullYear(2001);
-var onlyYear = d.getFullYear();
+const onlyYear = d.getFullYear();
 alert(onlyYear);
 ```

@@ -9,29 +9,29 @@
 - **default** statement works like **else** (optional)
 ```js
 if (dayOfWk === "Sat" || dayOfWk === "Sun") {
-  alert("Whoopee!");
+    alert("Whoopee!");
 }
 else if (dayOfWk === "Fri") {
-  alert("TGIF!");
+    alert("TGIF!");
 }
 else {
-  alert("Shoot me now!");
+    alert("Shoot me now!");
 }
 
 // that can be replaced by a switch statement, testing the value dayOfWk
 // notice that case keyword is not indented 
 switch(dayOfWk) {
 case "Sat" :
-  alert("Whoopee");
-  break;
+    alert("Whoopee");
+    break;
 case "Sun" :
-  alert("Whoopee");
-  break;
+    alert("Whoopee");
+    break;
 case "Fri" :
-  alert("TGIF!");
-  break;
+    alert("TGIF!");
+    break;
 default :
-  alert("Shoot me now!");
+    alert("Shoot me now!");
 }
 ```
 

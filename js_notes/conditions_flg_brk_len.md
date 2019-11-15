@@ -6,7 +6,7 @@
 
 ```js
 // most common case is this
-var matchFound = false;
+const matchFound = false;
 ```
 
 ## we can safe the computer from looping all the way to the end by "break"
@@ -18,9 +18,9 @@ var matchFound = false;
 - in Python we wrap a list into len()
 
 ```js
-var numElements = cleanestCities.length;
-var matchFound = false;
-for (var i = 0; i < numElements; i++) {
+const numElements = cleanestCities.length;
+let matchFound = false;
+for (let i = 0; i < numElements; i++) {
     if (cityToCheck === cleanestCities[i]) {
         matchFound = true;
         alert("It's one of the cleanest cities");

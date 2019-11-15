@@ -4,13 +4,17 @@
 - the JS version of str.lower() from Python we have **myString.toLowerCase();**
 - the JS version of str.upper() from Python we have **myString.toUpperCase();**
 
+- declaration with **const** should be default option, one variable = one thing
+- declaration with **let** should be used in for loops etc.
+- declaration with **var** is not typical
+
 In Python we could use string.capitalize() to do this:
 ```js
-var firstChar = cityToCheck.slice(0, 1);
-var otherChars = cityToCheck.slice(1);
+let firstChar = cityToCheck.slice(0, 1);
+let otherChars = cityToCheck.slice(1);
 firstChar = firstChar.toUpperCase();
 otherChars = otherChars.toLowerCase();
-var cappedCity = firstChar + otherChars;
+const cappedCity = firstChar + otherChars;
 ```
 
 ## Slicing strings like arrays
@@ -25,13 +29,13 @@ var cappedCity = firstChar + otherChars;
 
 How to loop over a string to check for double spaces
 ```js
-var str = prompt("Enter some text");
-var numChars = str.length;
-for (var i = 0; i < numChars; i++) {
-  if (str.slice(i, i + 2) === "  ") {
-    alert("No double spaces!");
-    break;
-  }
+const str = prompt("Enter some text");
+const numChars = str.length;
+for (let i = 0; i < numChars; i++) {
+    if (str.slice(i, i + 2) === "  ") {
+        alert("No double spaces!");
+        break;
+    }
 }
 ```
 
@@ -47,10 +51,10 @@ for (var i = 0; i < numChars; i++) {
 
 To test whether a string can be found within another string we use **string.indexOf("substring") !== -1**
 ```js
-var firstChar = text.indexOf("World War II");
+const firstChar = text.indexOf("World War II");
 if (firstChar !== -1) {
-  text = text.slice(0, firstChar) + "the Second World War" + text.slice(firstChar + 12);
-  // where 12, because "World War II".length; would return 12
+    text = text.slice(0, firstChar) + "the Second World War" + text.slice(firstChar + 12);
+    // where 12, because "World War II".length; would return 12
 }
 ```
 
@@ -65,11 +69,11 @@ if (firstChar !== -1) {
 
 example of charAt, alternative is .push() to keep adding to the end of an array
 ```js
-var str = 'prdel na hrnec';
-var myArray = [];
-for (var i = 0; i < str.length; i++) {
-  myArray[i] = str.charAt(i);
-  // myArray.push(str.charAt(i));
+const str = 'prdel na hrnec';
+const myArray = [];
+for (let i = 0; i < str.length; i++) {
+    myArray[i] = str.charAt(i);
+    // myArray.push(str.charAt(i));
 }
 ```
 
@@ -86,5 +90,5 @@ example:
 // first occurrence:
 text = text.replace("World War II", "the Second World War");
 // all at once:
-var newText = text.replace(/World War II/g, "the Second World War");
+const newText = text.replace(/World War II/g, "the Second World War");
 ```

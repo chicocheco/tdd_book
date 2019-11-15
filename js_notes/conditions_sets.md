@@ -3,10 +3,10 @@
 ## combine more conditions with &&, to test all True
 ```js
 if (weight > 300 && time < 6) {
-  alert("Come to our tryout!");
+    alert("Come to our tryout!");
 }
 else {
-  alert("Come to our cookout!");
+    alert("Come to our cookout!");
 }
 ```
 
@@ -15,10 +15,10 @@ In Python we combine with "and"
 ## how to test for any True with ||
 ```js
 if (SAT > avg || GPA > 2.5 || sport === "footbal") {
-  alert("Welcome to Bubba State!");
+    alert("Welcome to Bubba State!");
 }
 else {
-  alert("Have you looked into appliance repair?");
+    alert("Have you looked into appliance repair?");
 }
 ```
 
@@ -37,17 +37,17 @@ that means we can prioritize two conditions to be evaluated first before the oth
 
 ```js
 if (c === d) {
-  if (x === y) {
-    g = h;
-  }
-  else if (a === b) {
-    g = h;
-  }
-  else {
-    e = f;
-  }
-}
+    if (x === y) {
+        g = h;
+        }
+    else if (a === b) {
+        g = h;
+        }
+    else {
+        e = f;
+        }
+    }
 else {
-  e = f;
+    e = f;
 }
 ```

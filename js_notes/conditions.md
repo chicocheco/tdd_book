@@ -3,9 +3,9 @@
 ## all-or-nothing with single "if":
 
 ```js
-var x = prompt("Where does the Pope live?");
+const x = prompt("Where does the Pope live?");
 if (x === "Vatican") {
-  alert("Correct");
+    alert("Correct");
 }
 ```
 
@@ -13,23 +13,23 @@ nothing happens otherwise
 ## we can add the same condition with !== or use "else"
 ```js
 if (x === "Vatican") {
-  alert("Correct");
+    alert("Correct");
 }
 else {
-  alert("Wrong answer!");
+    alert("Wrong answer!");
 }
 ```
 ## when all tests above failed (more than 1 test) you want to test another condition (the "else if" statement)
 ```js
-var correctAnswer = "Vatican";
+const correctAnswer = "Vatican";
 if (x === correctAnswer) {
-  alert("Correct!");
+    alert("Correct!");
 }
 else if (x === "Rome") {
-  alert("Incorrect but close");
+    alert("Incorrect but close");
 }
 else {
-  alert("Incorrect");
+    alert("Incorrect");
 }
 ```
 

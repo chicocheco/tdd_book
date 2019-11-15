@@ -22,6 +22,7 @@
 - in JS there is a method combining inserting and optionally removing elements at the same time **.splice()** where, similarly to Python, first argument = inserting point, second argument = how many elements to remove from this index and finally third argument = what to insert
 ```js
 // this does not remove anything, adding 3 elements at index 2 (3rd position)
+let pets;
 pets.splice(2, 0, "pig", "duck", "emu");
 ```
 - the first index = where the inserted elements will start (replace element of this index, push rest further)

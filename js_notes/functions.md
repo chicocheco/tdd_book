@@ -6,17 +6,17 @@
 
 ```js
 function tellTime() {
-  var now = new Date();
-  var theHr = now.getHours();
-  var theMin = now.getMinutes();
-alert("Current time: "+ theHr + ":" + theMin);
+    const now = new Date();
+    const theHr = now.getHours();
+    const theMin = now.getMinutes();
+    alert("Current time: "+ theHr + ":" + theMin);
 }
 // call the function
 tellTime();
 
 // function with an argument - the string we would pass like "Hello"
 function greetUser(greeting) {
-  alert(greeting);
+    alert(greeting);
 }
 greetUser("Hello");
 ```
@@ -33,20 +33,19 @@ greetUser("Hello");
 
 ```js
 function calcTot(merchTot) {
-  var orderTot;
-  if (merchTot >= 100) {
-    orderTot = merchTot;
-  }
-  else if (merchTot < 50.01) {
-    orderTot = merchTot + 5;
-  }
-  else {
-    orderTot = merchTot + 5 + (.03 * (merchTot - 50));
-  }
-  return orderTot;
+    let orderTot;
+    if (merchTot >= 100) {
+        orderTot = merchTot;
+    }
+    else if (merchTot < 50.01) {
+        orderTot = merchTot + 5;
+    }
+    else {
+        orderTot = merchTot + 5 + (.03 * (merchTot - 50));
+    }
+    return orderTot;
 }
-
-var totalToCharge = calcTot(79.99);
+const totalToCharge = calcTot(79.99);
 ```
 
 

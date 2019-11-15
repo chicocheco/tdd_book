@@ -8,11 +8,11 @@
 - inner and outer loop **don't share** the same counter (start with "i" for outer loop, then "j" for inner and so on)
 
 ```js
-var firstNames = ["BlueRay ", "Upchuck ", "Lojack ", "Gizmo ", "Do-Rag "];
-var lastNames = ["Zzz", "Burp", "Dogbone", "Droop"];
-var fullNames = [];
-for (var i = 0; i < firstNames.length; i++) {
-  for (var j = 0; j < lastNames.length; j++) {
+const firstNames = ["BlueRay ", "Upchuck ", "Lojack ", "Gizmo ", "Do-Rag "];
+const lastNames = ["Zzz", "Burp", "Dogbone", "Droop"];
+const fullNames = [];
+for (let i = 0; i < firstNames.length; i++) {
+  for (let j = 0; j < lastNames.length; j++) {
     // add an element like "Zzz" to "BlueRay", then "Burp" and so on
     fullNames.push(firstNames[i] + lastNames[j]);
   }
@@ -32,33 +32,34 @@ Do-Rag Zzz,Do-Rag Burp,Do-Rag Dogbone,Do-Rag Droop
 ## there are two ways of doing this exercise
 
 ```js
-var animals = ["goat", "cat", "crow"];
-var products = ["milk", "cheese", "burger"];
-var foodItems = [];
-var k = 0;
+let animals = ["goat", "cat", "crow"];
+let products = ["milk", "cheese", "burger"];
+let foodItems = [];
+let k = 0;
 
-for (var i = 0; i < animals.length; i++) {
-  for (var j = 0; j < products.length; j++) {
-    foodItems.push(animals[i] + products[j]);
-    k++;
-  }
+for (let i = 0; i < animals.length; i++) {
+    for (let j = 0; j < products.length; j++) {
+        foodItems.push(animals[i] + products[j]);
+        k++;
+    }
 }
 alert(foodItems);
 // goatmilk,goatcheese,goatburger,catmilk,catcheese,catburger,crowmilk,crowcheese,crowburger
+```
 
+```js
 // another way:
-var animals = ["goat", "cat", "crow"];
-var products = ["milk", "cheese", "burger"];
-var foodItems = [];
-var k = 0;
+animals= ["goat", "cat", "crow"];
+products= ["milk", "cheese", "burger"];
+foodItems= [];
+k= 0;
 
-for (var i = 0; i < animals.length; i++) {
-  for (var j = 0; j < products.length; j++) {
-    foodItems[k] = animals[i] + products[j];
-    k++;
-  }
+for (let i = 0; i < animals.length; i++) {
+    for (let j = 0; j < products.length; j++) {
+        foodItems[k] = animals[i] + products[j];
+        k++;
+    }
 }
-
 alert(foodItems);
 // goatmilk,goatcheese,goatburger,catmilk,catcheese,catburger,crowmilk,crowcheese,crowburger
 ```

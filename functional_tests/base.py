@@ -34,7 +34,7 @@ class FunctionalTest(StaticLiveServerTestCase):
                 return
             except (AssertionError, WebDriverException) as e:
                 # WebDriverException for when page hasn't loaded
-                # AssertionError for when the table is there but haasn't reloaded yet
+                # AssertionError for when the table is there but hasn't reloaded yet
                 if time.time() - start_time > MAX_WAIT:
                     raise e
                 time.sleep(0.5)
@@ -44,9 +44,7 @@ class FunctionalTest(StaticLiveServerTestCase):
         while True:
             try:
                 return fn()
-                # we passed 'fn' as 'lambda: *function*' without (), therefore not calling it, just storing it
-                # we only call it when adding '()' to be able to run it repeatedly in the 'try' block
-                # we also 'return' it because it will either return True->pass or an exception error to work with later
+                # return its return value to be able to exit the loop immediately if no exception is raised
             except (AssertionError, WebDriverException) as e:
                 if time.time() - start_time > MAX_WAIT:
                     raise e

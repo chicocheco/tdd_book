@@ -25,13 +25,12 @@ def view_list(request, list_id):
 
 def new_list(request):
     form = ItemForm(data=request.POST)
-    if form.is_valid():
+    if form.is_valid():  # if False, populating the errors attributes, works with bound forms only (with data)
         list_ = List.objects.create()
-        # create a new Item within a new list from home page
-        form.save(for_list=list_)
-        # new list object gets its new URL (defined in the List model)
-        return redirect(list_)
+        form.save(for_list=list_)  # create a new Item within a new list from home page
+        return redirect(list_)  # new list object gets its new URL (defined in the List model)
+
     else:
-        # either new (empty) or with .errors attribute if failed validating
+        # not valid item, either empty or with .errors attribute if failed validating
         return render(request, 'home.html', {'form': form})
 

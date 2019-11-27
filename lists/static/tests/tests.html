@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>JavaScript tests</title>
+    <link rel="stylesheet" href="qunit-2.9.2.css">
+</head>
+<body>
+<div id="qunit"></div>
+
+<!--jQuery resets the content of the fixtures div BEFORE each test-->
+<!--to test JS code attaching event handler to anything within this div element-->
+<!--we must initialize the JS code in each test manually-->
+<div id="qunit-fixture">
+
+    <form>
+        <input name="text"/>
+        <div class="has-error">Error text</div>
+    </form>
+
+</div>
+
+
+<script src="../jquery-3.4.1.min.js"></script>
+<script src="../list.js"></script>
+<script src="qunit-2.9.2.js"></script>
+
+<script>
+    // Qunit tests are similar to unittest module of Python
+    // jQuery: everything what follows $ is called a jQuery and it's CSS selector
+    // .hide() adds style="display: none" to the element
+
+    QUnit.test("errors should be hidden on keypress", function (assert) {
+        // list.js, that attaches an event handler to our input element,
+        // gets loaded first but jQuery refreshes qunit-fixture element
+        // before each test, so the event handler must by attached again "by hand":
+        initialize();
+        $('input[name="text"]').trigger('keypress');
+        assert.equal($('.has-error').is(':visible'), false);
+    });
+
+    QUnit.test("errors aren't hidden if there is no keypress", function (assert) {
+        initialize();
+        assert.equal($('.has-error').is(':visible'), true);
+    });
+
+</script>
+</body>
+</html>

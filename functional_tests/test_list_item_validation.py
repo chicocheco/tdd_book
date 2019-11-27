@@ -70,8 +70,12 @@ class ItemValidationTest(FunctionalTest):
             "You've already got this in your list"
         ))
 
+
     def test_error_messages_are_cleared_on_input(self):
         # Tania otevre novy seznam a zpusobi validaci error
+        # this uses JavaScript and can be tested as:
+        # python manage.py test
+        # functional_tests.test_list_item_validation.ItemValidationTest.test_error_messages_are_cleared_on_input
         self.browser.get(self.live_server_url)
         self.get_item_input_box().send_keys('Banter too thick')
         self.get_item_input_box().send_keys(Keys.ENTER)

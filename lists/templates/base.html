@@ -35,7 +35,9 @@
 <script src="../static/jquery-3.4.1.min.js"></script>
 <script src="../static/list.js"></script>
 <script>
-    initialize();
+    $(document).ready(function () {  // an. function to execute when the DOM is fully loaded
+        window.SuperLists.initialize();
+    })
 </script>
 
 </body>

@@ -35,13 +35,13 @@
         // list.js, that attaches an event handler to our input element,
         // gets loaded first but jQuery refreshes qunit-fixture element
         // before each test, so the event handler must by attached again "by hand":
-        initialize();
+        window.SuperLists.initialize();
         $('input[name="text"]').trigger('keypress');
         assert.equal($('.has-error').is(':visible'), false);
     });
 
     QUnit.test("errors aren't hidden if there is no keypress", function (assert) {
-        initialize();
+        window.SuperLists.initialize();
         assert.equal($('.has-error').is(':visible'), true);
     });
 

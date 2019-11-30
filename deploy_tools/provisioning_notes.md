@@ -18,8 +18,9 @@ eg, on Ubuntu:
 * replace SITENAME with, e.g., chicocheco.xyz using `sed` and `sudo tee` and enable a conf file by sym-linking it 
 
 ```bash
-sed "s/SITENAME/superlists.ottg.eu/g" source/deploy_tools/nginx.template.conf | sudo tee /etc/nginx/sites-available/superlists.ottg.eu
-sudo ln -s ../sites-available/superlists.ottg.eu /etc/nginx/sites-enabled/superlists.ottg.eu
+sed "s/SITENAME/chicocheco.xyz/g" source/deploy_tools/nginx.template.conf | sudo tee /etc/nginx/sites-available/chicocheco.xyz
+sudo ln -s ../sites-available/chicocheco.xyz /etc/nginx/sites-enabled/chicocheco.xyz
+sudo systemctl reload nginx
 ```
 
 ## Systemd service
@@ -28,12 +29,16 @@ sudo ln -s ../sites-available/superlists.ottg.eu /etc/nginx/sites-enabled/superl
 * replace SITENAME with, e.g., chicocheco.xyz with `sed` and `sudo tee`
 
 ```bash
-sed "s/SITENAME/superlists.ottg.eu/g" source/deploy_tools/gunicorn-systemd.template.service | sudo tee /etc/systemd/system/gunicorn-superlists.ottg.eu.service
+sed "s/SITENAME/chicocheco.xyz/g" source/deploy_tools/gunicorn-systemd.template.service | sudo tee /etc/systemd/system/gunicorn-chicocheco.xyz.service
+sudo systemctl daemon-reload
+sudo systemctl enable gunicorn-chicocheco.xyz
+sudo systemctl start gunicorn-chicocheco.xyz
 ```
 
 ## Folder structure
 Assume we have a user account at /home/username
-```/home/username
+```
+/home/username
 └── sites
     └── SITENAME
         ├── database

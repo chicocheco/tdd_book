@@ -88,6 +88,7 @@ class ItemValidationTest(FunctionalTest):
         ))
 
         # zacne neco psat do policka aby zmizela chybova hlaska o jiz existujici polozce
+        #TODO: test for focus event too
         self.get_item_input_box().send_keys('a')
 
         # ma radost, ze chybova hlaska zmizi

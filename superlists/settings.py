@@ -119,5 +119,5 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR.parent / 'static'
+STATIC_URL = '/static/'  # how URL of static files starts (in HTML use for ex. src="/static/jquery-3.4.1.min.js")
+STATIC_ROOT = BASE_DIR.parent / 'static'  # where collectstatic collects files

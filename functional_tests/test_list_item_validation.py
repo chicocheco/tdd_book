@@ -70,7 +70,6 @@ class ItemValidationTest(FunctionalTest):
             "You've already got this in your list"
         ))
 
-
     def test_error_messages_are_cleared_on_input(self):
         # Tania otevre novy seznam a zpusobi validaci error
         # this uses JavaScript and can be tested as:

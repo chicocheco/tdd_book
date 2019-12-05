@@ -121,3 +121,20 @@ USE_TZ = True
 
 STATIC_URL = '/static/'  # how URL of static files starts (in HTML use for ex. src="/static/jquery-3.4.1.min.js")
 STATIC_ROOT = BASE_DIR.parent / 'static'  # where collectstatic collects files
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+        },
+    },
+    'root': {'level': 'INFO'},
+}

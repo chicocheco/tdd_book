@@ -21,7 +21,7 @@ class MyListsTest(FunctionalTest):
         # 404 pages load the fastest!
         self.browser.get(self.live_server_url + '/404_no_such_url/')
         self.browser.add_cookie(dict(
-            name=settings.SESSION_COOKIE_NAME,
+            name=settings.SESSION_COOKIE_NAME,  # default is 'sessionid'
             value=session.session_key,
             path='/',
         ))

@@ -26,7 +26,7 @@ class FunctionalTest(StaticLiveServerTestCase):
 
     def setUp(self) -> None:
         options = FirefoxOptions()
-        # options.add_argument("--headless")
+        options.add_argument("--headless")
         self.browser = webdriver.Firefox(options=options)
         # always set the env.variable inline, do not "export"
         # STAGING_SERVER=chicocheco.xyz python manage.py test functional_tests

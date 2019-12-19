@@ -1,5 +1,7 @@
 from .base import FunctionalTest
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+
 from selenium.webdriver.common.keys import Keys
 
 
@@ -54,10 +56,11 @@ class NewVisitorTest(FunctionalTest):
 
         ## vytvorime novou kopii prohlizece (zamezime tomu, ze by se neco nahralo z cookies atd.)
         self.browser.quit()
-        self.browser = webdriver.Firefox()
+        options = FirefoxOptions()
+        options.add_argument("--headless")
+        self.browser = webdriver.Firefox(options=options)
 
         # Standa otevre domovskou stranku, kde neni znamky Tanii seznamu
-        # TODO: otevre se FF i presto, ze je headless
         self.browser.get(self.live_server_url)
         page_text = self.browser.find_element_by_tag_name('body').text
         self.assertNotIn('Buy peacock feathers', page_text)

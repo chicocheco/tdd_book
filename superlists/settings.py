@@ -15,10 +15,6 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = '%4br-!17f_9i4hs@!2$%wrr#h8zl@n%^7ud!-%b8bfnmk^-p3k'
-DEBUG = True
-ALLOWED_HOSTS = []
-
 # to be modified on the server via environment variables
 if 'DJANGO_DEBUG_FALSE' in os.environ:
     DEBUG = False

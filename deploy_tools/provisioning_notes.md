@@ -31,6 +31,30 @@ sudo systemctl daemon-reload
 sudo systemctl enable gunicorn-chicocheco.xyz
 sudo systemctl start gunicorn-chicocheco.xyz
 ```
+* also every time we modify the .service file we must *reload* it
+```bash
+sudo systemctl restart gunicorn-chicocheco.xyz
+```
+
+## Summary
+```bash
+sudo rm /etc/nginx/sites-available/default
+ls /etc/nginx/sites-available/
+cat ./deploy_tools/nginx.template.conf | sed "s/DOMAIN/chicocheco.xyz/g" | sudo tee /etc/nginx/sites-available/chicocheco.xyz
+sudo ln -s /etc/nginx/sites-available/chicocheco.xyz /etc/nginx/sites-enabled/chicocheco.xyz
+readlink /etc/nginx/sites-enabled/chicocheco.xyz
+
+cat ./deploy_tools/gunicorn-systemd.template.service | sed "s/DOMAIN/chicocheco.xyz/g" \
+| sudo tee /etc/systemd/system/gunicorn-chicocheco.xyz.service
+
+sudo systemctl daemon-reload
+sudo systemctl reload nginx
+sudo systemctl restart gunicorn-chicocheco.xyz
+
+systemctl list-unit-files | grep enabled | grep gunicorn
+sudo systemctl enable gunicorn-chicocheco.xyz
+sudo systemctl start gunicorn-chicocheco.xyz
+```
 
 ## Folder structure
 Assume we have a user account at /home/username

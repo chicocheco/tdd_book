@@ -23,6 +23,7 @@ class ItemForm(forms.models.ModelForm):
 
     def save(self, for_list):
         # the .instance attribute on a form represents the db object that is being modified or created
+        # Item.list = for_list
         self.instance.list = for_list
         return super().save()
 

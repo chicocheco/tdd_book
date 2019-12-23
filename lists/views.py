@@ -18,7 +18,7 @@ def view_list(request, list_id):
         form = ExistingListItemForm(for_list=list_, data=request.POST)  # bounded, passing dict to data arg from POST
         if form.is_valid():
             form.save()
-            return redirect(list_)
+            return redirect(list_)  # works thanks to get_absolute_url in List model
     # else GET
     return render(request, 'list.html', {'list': list_, 'form': form})
 
@@ -28,7 +28,7 @@ def new_list(request):
     if form.is_valid():  # if False, populating the errors attributes, works with bound forms only (with data)
         list_ = List.objects.create()
         form.save(for_list=list_)  # create a new Item within a new list from home page
-        return redirect(list_)  # new list object gets its new URL (defined in the List model)
+        return redirect(list_)
 
     else:
         # not valid item, either empty or with .errors attribute if failed validating

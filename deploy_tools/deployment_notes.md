@@ -92,9 +92,9 @@ We use the `s/replaceme/withthis/g` syntax with `sed`. The `tee` command writes 
  
 > Once we have the site live on the server we mark it with these two (2) git tags and push them to the repo. 
 ```bash
-git tag LIVE
+git tag -f LIVE
 export TAG=$(date +DEPLOYED-%d/%m/%y-%H%M) # this generates a timestamp DEPLOYED-11/09/19-0613
 echo $TAG # should show "DEPLOYED-" and then the timestamp
 git tag $TAG
-git push origin LIVE $TAG # pushes the tags up
+git push -f origin LIVE $TAG # pushes the tags up
 ```

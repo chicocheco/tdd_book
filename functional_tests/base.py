@@ -8,6 +8,7 @@ import os
 MAX_WAIT = 10
 
 
+# wait decorator
 def wait(fn):
     def modified_fn(*args, **kwargs):
         start_time = time.time()
@@ -24,7 +25,7 @@ def wait(fn):
 
 class FunctionalTest(StaticLiveServerTestCase):
 
-    def setUp(self) -> None:
+    def setUp(self):
         options = FirefoxOptions()
         options.add_argument("--headless")
         self.browser = webdriver.Firefox(options=options)
@@ -34,7 +35,7 @@ class FunctionalTest(StaticLiveServerTestCase):
         if staging_server:
             self.live_server_url = 'http://' + staging_server
 
-    def tearDown(self) -> None:
+    def tearDown(self):
         self.browser.quit()
 
     # substitution for implicit wait

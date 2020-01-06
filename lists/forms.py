@@ -28,10 +28,11 @@ class ItemForm(forms.models.ModelForm):
         return super().save()
 
 
+# a form which validates that list items are unique needs to know the list too
 class ExistingListItemForm(ItemForm):
     def __init__(self, for_list, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.instance.list = for_list
+        self.instance.list = for_list  # we assign the list object here instead of in .save() as in ItemForm
 
     # Django uses a method called validate_unique, both on forms and models,
     # and we can use both, in conjunction with the instance attribute:
@@ -43,5 +44,5 @@ class ExistingListItemForm(ItemForm):
             self._update_errors(e)
 
     def save(self):
-        # don't use custom .save() that is inherited (possible use of super() here)
+        # we use the original save() because we don't need to assign a list here, we did it in the constructor already
         return forms.models.ModelForm.save(self)

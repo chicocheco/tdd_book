@@ -52,7 +52,7 @@
                 <form method="POST" action="{% block form_action %}{% endblock %}">
                     {{ form.text }} {# renders HTML output for 'text' field #}
                     {% csrf_token %}
-                    {% if form.errors %}
+                    {% if form.errors %} {# this is all error msgs #}
                         <div class="form-group has-error">
                             {# this is errors for 'text' field only #}
                             <div class="help-block">{{ form.text.errors }}</div>

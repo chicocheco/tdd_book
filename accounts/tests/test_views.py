@@ -77,7 +77,7 @@ class LoginViewTest(TestCase):
         # response.request e.g. {'PATH_INFO': '/accounts/login', 'REQUEST_METHOD': 'GET', ...
         self.assertEqual(
             mock_auth.login.call_args,  # login(request, user)
-            call(response.wsgi_request, mock_auth.authenticate.return_value)
+            call(response.wsgi_request, mock_auth.authenticate.return_value)  # called with a request and user
         )
 
     def test_does_not_login_if_user_is_not_authenticated(self, mock_auth):

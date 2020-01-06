@@ -24,7 +24,7 @@ def view_list(request, list_id):
 
 
 def new_list(request):
-    form = ItemForm(data=request.POST)
+    form = ItemForm(data=request.POST)  # we don't assign a new empty list at filling out the form yet
     if form.is_valid():  # if False, populating the errors attributes, works with bound forms only (with data)
         list_ = List.objects.create()
         form.save(for_list=list_)  # create a new Item within a new list from home page

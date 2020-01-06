@@ -27,6 +27,7 @@ class UserModelTest(TestCase):
         user.full_clean()  # should not raise
 
     def test_email_is_primary_key(self):
+        # test as documentation - we use email directly as a primary key (it must be unique)
         user = User(email='a@b.com')
         self.assertEqual(user.pk, 'a@b.com')
 

@@ -24,7 +24,7 @@ class LoginTest(FunctionalTest):
         ))
 
         # zkontroluje svoje emaily a najde zpravu
-        ## Django gives us access to any emails the server tries to send via the mail.outbox attribute
+        ## Django gives us access to any emails the server tries to send via the mail.outbox attribute - mocked out
         email = mail.outbox[0]
         self.assertIn(TEST_MAIL, email.to)
         self.assertEqual(email.subject, SUBJECT)

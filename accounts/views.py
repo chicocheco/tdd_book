@@ -7,10 +7,8 @@ from accounts.models import Token
 
 def send_login_email(request):
     email = request.POST['email']
-    token = Token.objects.create(email=email)
-    url = request.build_absolute_uri(
-        reverse('login') + '?token=' + str(token.uid)
-    )
+    token = Token.objects.create(email=email)  # generates uid token.uid
+    url = request.build_absolute_uri(reverse('login') + '?token=' + str(token.uid))
     message_body = f'Use this link to log in:\n\n{url}'
     send_mail(
         'Your login link for Superlists',  # subject
@@ -27,7 +25,7 @@ def send_login_email(request):
 
 def login(request):
     # login() saves the user’s ID in the session
-    # in .../accounts/login?token=abcd123, this is how we retrieve the token:
+    # in .../accounts/login?token=abcd123, this is how we retrieve the token with GET.get():
     user = auth.authenticate(uid=request.GET.get('token'))
     if user:
         auth.login(request, user)

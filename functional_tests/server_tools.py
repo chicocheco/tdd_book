@@ -1,7 +1,7 @@
 from fabric.api import run, env
 from fabric.context_managers import settings, shell_env
 
-env.key_filename = ['~/standa.pem']
+env.key_filename = ['~/standa.pem']  # TODO: remove hardcoded keyfile
 
 
 def _get_manage_dot_py(host):
@@ -10,7 +10,7 @@ def _get_manage_dot_py(host):
 
 def reset_database(host):
     manage_dot_py = _get_manage_dot_py(host)
-    with settings(host_string=f'ubuntu@{host}'):  # TODO: keyfile
+    with settings(host_string=f'ubuntu@{host}'):
         run(f'{manage_dot_py} flush --noinput')
 
 

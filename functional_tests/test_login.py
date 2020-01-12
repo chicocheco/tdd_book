@@ -2,6 +2,7 @@ import os
 import poplib
 import time
 import re
+from contextlib import contextmanager
 
 from django.core import mail
 from selenium.webdriver.common.keys import Keys
@@ -20,28 +21,36 @@ class LoginTest(FunctionalTest):
             self.assertEqual(subject, email.subject)
             return email.body
 
-        email_id = None
+        @contextmanager  # in order to see a change in the message count each time through the loop
+        def pop_inbox():
+            try:
+                inbox_yahoo = poplib.POP3_SSL('pop.mail.yahoo.com')
+                inbox_yahoo.user(test_email)
+                inbox_yahoo.pass_(os.environ.get('YAHOO_PASSWORD'))  # must be exported first
+                yield inbox_yahoo
+            finally:
+                # the mailbox on the server is locked until quit() is called
+                inbox_yahoo.quit()
+
         start = time.time()
-        inbox = poplib.POP3_SSL('pop.mail.yahoo.com')
-        try:
-            inbox.user(test_email)
-            inbox.pass_(os.environ['YAHOO_PASSWORD'])
-            while time.time() - start < 60:
-                # get 10 newest messages
-                count, _ = inbox.stat()
-                for i in reversed(range(max(1, count - 10), count + 1)):
-                    print('getting msg', i)
-                    _, lines, __ = inbox.retr(i)
+        while time.time() - start < 60:
+            with pop_inbox() as inbox:
+                time.sleep(.5)
+                count, _ = inbox.stat()  # (message count, mailbox size)
+                last_index = max(0, count - 5)
+                print(f'Found {count} emails in inbox of {test_email}. Checking from {count} to {last_index + 1}.')
+                time.sleep(.5)
+                for i in range(count, last_index, -1):  # the higher index, the newer email
+                    _, lines, __ = inbox.retr(i)  # (response, ['line', ...], octets)
                     lines = [line.decode('utf8') for line in lines]
-                    print(lines)
                     if f'Subject: {subject}' in lines:
-                        email_id = i
+                        time.sleep(.5)
+                        inbox.dele(i)
                         body = '\n'.join(lines)
-                        return body
-        finally:
-            if email_id:
-                inbox.dele(email_id)
-            inbox.quit()
+                        # print(body)
+                        return body  # finish wait_for_email() here
+            print('re-trying to find the email in 5 secs...')
+            time.sleep(5)
 
     def test_can_get_email_link_to_log_in(self):
         # Tania jde stranku a poprve si vsimne sekce "Log in" v navbaru
@@ -62,6 +71,7 @@ class LoginTest(FunctionalTest):
 
         # zkontroluje svoje emaily a najde zpravu
         ## Django gives us access to any emails the server tries to send via the mail.outbox attribute - mocked out
+        time.sleep(.5)  # give it time to receive the email
         body = self.wait_for_email(test_email, SUBJECT)
 
         # ma v sobe URL odkaz
@@ -70,6 +80,7 @@ class LoginTest(FunctionalTest):
         if not url_search:
             self.fail(f'Could not find url in email body:\n{body}')
         url = url_search.group(0)
+        print('login url: ', url)
         self.assertIn(self.live_server_url, url)
 
         # klikne na nej
@@ -79,7 +90,8 @@ class LoginTest(FunctionalTest):
         self.wait_to_be_logged_in(email=test_email)
 
         # ted se odhlasi
-        self.browser.find_element_by_link_text('Log out').click()
+        time.sleep(2)
+        self.browser.find_element_by_link_text('Log out').click()  # proof we are logged in, if found
 
         # je odhlasena
         self.wait_to_be_logged_out(email=test_email)

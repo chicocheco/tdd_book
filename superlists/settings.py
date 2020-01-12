@@ -98,11 +98,10 @@ STATIC_ROOT = BASE_DIR / 'static'  # where collectstatic collects files
 # mailbox for sending emails from app
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'cheesegoat16@gmail.com'
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')  # stored on the server, locally just mocked out
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-# TODO: make log looking neater
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

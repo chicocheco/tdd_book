@@ -14,18 +14,21 @@
         <div class="container-fluid">
             <a href="/" class="navbar-brand">Superlists</a>
             {% if user.email %}
-            <ul class="nav navbar-nav navbar-right">
-                <li class="navbar-text">Logged in as {{ user.email }}</li>
-                <li><a href="{% url 'logout' %}">Log out</a></li>
-            </ul>
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="{% url 'my_lists' user.email %}">My lists</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="navbar-text">Logged in as {{ user.email }}</li>
+                    <li><a href="{% url 'logout' %}">Log out</a></li>
+                </ul>
             {% else %}
-            <form class="navbar-form navbar-right"
-                  action="{% url 'send_login_email' %}"
-                  method="POST">
-                <span>Enter email to log in:</span>
-                <input type="text" class="form-control" name="email"/>
-                {% csrf_token %}
-            </form>
+                <form class="navbar-form navbar-right"
+                      action="{% url 'send_login_email' %}"
+                      method="POST">
+                    <span>Enter email to log in:</span>
+                    <input type="text" class="form-control" name="email"/>
+                    {% csrf_token %}
+                </form>
             {% endif %}
         </div>
     </div>

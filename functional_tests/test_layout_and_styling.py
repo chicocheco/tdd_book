@@ -17,9 +17,8 @@ class LayoutAndStylingTest(FunctionalTest):
         )
 
         # ona zacne novy seznam a vidi ze vstupni pole pro seznam je take vycentrovane
-        inputbox.send_keys('testing')
-        inputbox.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1: testing')  # lists/1/...
+        self.add_list_item('testing')
+        # lists/1/...
         inputbox = self.get_item_input_box()
         self.assertAlmostEqual(
             inputbox.location['x'] + inputbox.size['width'] / 2,

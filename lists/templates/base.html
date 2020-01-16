@@ -51,20 +51,37 @@
         <div class="col-6 jumbotron">
             <div class="text-center">
                 <h1>{% block header_text %}{% endblock %}</h1>
+                <div class="row">
+                    <div class="col col-md-offset-3">
+                        {% block list_form %}
+                            <form method="POST" action="{% block form_action %}{% endblock %}">
+                                {{ form.text }} {# renders HTML output for 'text' field #}
+                                {% csrf_token %}
+                                {% if form.errors %} {# this is all error msgs #}
+                                    <div class="form-group has-error">
+                                        {# this is errors for 'text' field only #}
+                                        <div class="help-block">{{ form.text.errors }}</div>
+                                    </div>
+                                {% endif %}
+                            </form>
+                        {% endblock %}
+                    </div>
+                </div>
 
-                <form method="POST" action="{% block form_action %}{% endblock %}">
-                    {{ form.text }} {# renders HTML output for 'text' field #}
-                    {% csrf_token %}
-                    {% if form.errors %} {# this is all error msgs #}
-                        <div class="form-group has-error">
-                            {# this is errors for 'text' field only #}
-                            <div class="help-block">{{ form.text.errors }}</div>
-                        </div>
-                    {% endif %}
-                </form>
+                <div class="row">
+                    <div class="cold-md-6 col-md-offset-3">
+                        {% block table %}
+                        {% endblock %}
+                    </div>
+                </div>
 
-                {% block table %}
-                {% endblock %}
+                <div class="row">
+                    <div class="cold-md-6 col-md-offset-3">
+                        {% block extra_content %}
+                        {% endblock %}
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

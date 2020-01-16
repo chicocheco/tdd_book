@@ -35,5 +35,6 @@ def new_list(request):
         return render(request, 'home.html', {'form': form})
 
 
+# .filter(username='abcd') will give list of match record, .get only one record
 def my_lists(request, email):
     return render(request, 'my_lists.html', {'email': email})

@@ -1,8 +1,10 @@
+from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect
-from django.core.exceptions import ValidationError
-from django.http import HttpResponse
-from lists.models import Item, List
+
 from lists.forms import ItemForm, ExistingListItemForm
+from lists.models import List
+
+User = get_user_model()
 
 
 # every view function must be given a HttpRequest()
@@ -26,8 +28,11 @@ def view_list(request, list_id):
 def new_list(request):
     form = ItemForm(data=request.POST)  # we don't assign a new empty list at filling out the form yet
     if form.is_valid():  # if False, populating the errors attributes, works with bound forms only (with data)
-        list_ = List.objects.create()
-        form.save(for_list=list_)  # create a new Item within a new list from home page
+        # list_ = List.objects.create()
+        list_ = List()  # TODO: not creating a DB record?
+        list_.owner = request.user
+        list_.save()
+        form.save(for_list=list_)  # create a new Item within a new empty list from home page
         return redirect(list_)
 
     else:
@@ -37,4 +42,5 @@ def new_list(request):
 
 # .filter(username='abcd') will give list of match record, .get only one record
 def my_lists(request, email):
-    return render(request, 'my_lists.html', {'email': email})
+    owner = User.objects.get(email=email)
+    return render(request, 'my_lists.html', {'owner': owner})

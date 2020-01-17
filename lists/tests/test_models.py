@@ -1,8 +1,10 @@
 from django.test import TestCase
 from django.core.exceptions import ValidationError
+from django.contrib.auth import get_user_model
 
 from lists.models import Item, List
 
+User = get_user_model()
 
 # Setup, Exercise, Assert is the typical structure for a  unit test.
 
@@ -92,7 +94,7 @@ class ItemModelTest(TestCase):
         item = Item()
         item.list = list_
         item.save()
-        self.assertIn(item, list_.item_set.all())
+        self.assertIn(item, list_.item_set.all())  # model Item has a FK -> List
 
 
 class ListModelTest(TestCase):

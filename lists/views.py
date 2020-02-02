@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect
 
-from lists.forms import ItemForm, ExistingListItemForm
+from lists.forms import ItemForm, ExistingListItemForm, NewListForm
 from lists.models import List
 
 User = get_user_model()
@@ -38,6 +38,14 @@ def new_list(request):
     else:
         # not valid item, either empty or with .errors attribute if failed validating
         return render(request, 'home.html', {'form': form})
+
+
+def new_list2(request):
+    form = NewListForm(data=request.POST)
+    if form.is_valid():
+        list_ = form.save(owner=request.user)
+        return redirect(list_)
+    return render(request, 'home.html', {'form': form})
 
 
 # .filter(username='abcd') will give list of match record, .get only one record

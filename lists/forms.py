@@ -28,6 +28,10 @@ class ItemForm(forms.models.ModelForm):
         return super().save()
 
 
+class NewListForm:
+    pass
+
+
 # a form which validates that list items are unique needs to know the list too
 class ExistingListItemForm(ItemForm):
     def __init__(self, for_list, *args, **kwargs):

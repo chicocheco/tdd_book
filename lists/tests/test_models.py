@@ -118,8 +118,15 @@ class ListModelTest(TestCase):
         new_list = List.objects.first()
         self.assertEqual(new_list.owner, user)
 
-    def test_lists_can_have_owners(self):
+    @staticmethod
+    def test_lists_can_have_owners():
         List(owner=User())  # should not raise
 
-    def test_list_owner_is_optional(self):
+    @staticmethod
+    def test_list_owner_is_optional():
         List().full_clean()  # should not raise
+
+    def test_create_returns_new_list_object(self):
+        returned = List.create_new(first_item_text='new item text')
+        new_list = List.objects.first()
+        self.assertEqual(returned, new_list)

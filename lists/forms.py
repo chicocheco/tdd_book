@@ -21,11 +21,11 @@ class ItemForm(forms.models.ModelForm):
             'text': {'required': EMPTY_ITEM_ERROR}  # fallback when HTML5 validation does not work
         }
 
-    def save(self, for_list):
+    # def save(self, for_list):
         # the .instance attribute on a form represents the db object that is being modified or created
         # Item.list = for_list
-        self.instance.list = for_list
-        return super().save()
+        # self.instance.list = for_list
+        # return super().save()
 
 
 class NewListForm(ItemForm):
@@ -52,6 +52,6 @@ class ExistingListItemForm(ItemForm):
             e.error_dict = {'text': [DUPLICATE_ITEM_ERROR]}
             self._update_errors(e)
 
-    def save(self):
+    # def save(self):
         # we use the original save() because we don't need to assign a list here, we did it in the constructor already
-        return forms.models.ModelForm.save(self)
+        # return forms.models.ModelForm.save(self)

@@ -24,27 +24,27 @@ def view_list(request, list_id):
     # else GET
     return render(request, 'list.html', {'list': list_, 'form': form})
 
+# old version before isolated tests
+# def new_list(request):
+#     form = ItemForm(data=request.POST)  # we don't assign a new empty list at filling out the form yet
+#     if form.is_valid():  # if False, populating the errors attributes, works with bound forms only (with data)
+#         # list_ = List.objects.create()
+#         list_ = List()
+#         if request.user.is_authenticated:
+#             list_.owner = request.user
+#         list_.save()
+#         form.save(for_list=list_)  # create a new Item within a new empty list from home page
+#         return redirect(list_)
+#     else:
+#         # not valid item, either empty or with .errors attribute if failed validating
+#         return render(request, 'home.html', {'form': form})
+
 
 def new_list(request):
-    form = ItemForm(data=request.POST)  # we don't assign a new empty list at filling out the form yet
-    if form.is_valid():  # if False, populating the errors attributes, works with bound forms only (with data)
-        # list_ = List.objects.create()
-        list_ = List()
-        if request.user.is_authenticated:
-            list_.owner = request.user
-        list_.save()
-        form.save(for_list=list_)  # create a new Item within a new empty list from home page
-        return redirect(list_)
-    else:
-        # not valid item, either empty or with .errors attribute if failed validating
-        return render(request, 'home.html', {'form': form})
-
-
-def new_list2(request):
     form = NewListForm(data=request.POST)
     if form.is_valid():
         list_ = form.save(owner=request.user)
-        return redirect(list_)  # expects the form to return a list item
+        return redirect(list_)  # expects the form to return a List item
     return render(request, 'home.html', {'form': form})
 
 
